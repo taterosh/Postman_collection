@@ -1,0 +1,247 @@
+{
+	"info": {
+		"_postman_id": "58836c08-4862-4c2c-870c-452127d0b3ae",
+		"name": "Timetta",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20802113"
+	},
+	"item": [
+		{
+			"name": "Token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "external",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "all offline_access",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "{{userEmail}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{userPassword}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://auth.timetta.com/connect/token",
+					"protocol": "https",
+					"host": [
+						"auth",
+						"timetta",
+						"com"
+					],
+					"path": [
+						"connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Project",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Бондаренко Татьяна Евгеньевна\",\n    \"billingTypeId\": \"e87e0e6b-c034-45ac-8b74-bd0256f3f535\",\n    \"managerId\": \"bcd753cc-0b80-47ae-a471-6ff7f06010e1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.timetta.com/odata/Projects",
+					"protocol": "https",
+					"host": [
+						"api",
+						"timetta",
+						"com"
+					],
+					"path": [
+						"odata",
+						"Projects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Project Billing Types",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.timetta.com/odata/ProjectBillingTypes",
+					"protocol": "https",
+					"host": [
+						"api",
+						"timetta",
+						"com"
+					],
+					"path": [
+						"odata",
+						"ProjectBillingTypes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Changer manager",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "authority",
+						"value": "api.timetta.com"
+					},
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9,ru;q=0.8,zh;q=0.7"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IkUzQUJEMzAxNzdEMEZDNjU2RDg4MDRFOTQ2RUJFOTdCNTJBRUQ2MzhSUzI1NiIsInR5cCI6ImF0K2p3dCIsIng1dCI6IjQ2dlRBWGZRX0dWdGlBVHBSdXZwZTFLdTFqZyJ9.eyJuYmYiOjE2NzA2MDUxMDUsImV4cCI6MTY3MDYwODcwNSwiaXNzIjoiaHR0cHM6Ly9hdXRoLnRpbWV0dGEuY29tIiwiYXVkIjoid29ya3BvaW50LWFwaSIsImNsaWVudF9pZCI6IndlYl9hcHAiLCJzdWIiOiJnZXJtYW5AZG9sbmlrb3YucnUiLCJhdXRoX3RpbWUiOjE2NzA1OTg0OTcsImlkcCI6ImxvY2FsIiwibmFtZSI6ItCQ0LvQtdC60YHQsNC90LTRgCDQndC10YHRgtC10YDQvtCyIiwidGVuYW50IjoiZG9sbmlrb3YucnUiLCJqdGkiOiI3RDE2MzVCOTZGNUQyNzI5NDcyNDQ0MzVCRjUxMUYwRSIsInNpZCI6IjlDNjMxNEZDNjQzRkZFMDhERDA1QUI3RTBBMzMyMjBEIiwiaWF0IjoxNjcwNjA1MTA1LCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwiYWxsIl0sImFtciI6WyJwd2QiXX0.klPK2YWn_i8zyJ8s-d0X_3A5rm-KlSZ7c_IzhdSXAibSxuISCb9DJa1EJQZRvvUekUCe6w3oTVtM7UziY3c2sTXjBO42XxrHqcX-kWApVBQQYmUuvfA9NUlkJdNGVh7uIcC30TQF-obAWYK_17oJlpHDibjhQQcGpxJGfctugz1K7HNXyaySDStpZPg1CMx59pAB0Mhv1LdpnJAGyFwbuCP194tWeWuSJDd-e1F5wW6exutYSPI97vmhkukScS2XNGYbn7_bXo2wzku12jBwDa_-2Z9A-Tfita0ikB9S8xrSlqOk6KlzH2Ak5G19DTrktWFCN1rTkaPtZkI7P3tCCA"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "ngsw-bypass",
+						"value": "true"
+					},
+					{
+						"key": "origin",
+						"value": "https://app.timetta.com"
+					},
+					{
+						"key": "referer",
+						"value": "https://app.timetta.com/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"108\", \"Google Chrome\";v=\"108\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"macOS\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":\"aa516b39-f2ec-4a2f-beaa-dc99b2b5a14b\",\n    \"name\":\"Бондаренко Татьяна Евгеньевна\",\n    \"code\":null,\n    \"stateId\":\"9752fc91-714a-414f-9c03-8a3a1d6cce06\",\n    \"managerId\":\"26c1bdd1-7e67-41da-ac68-047355a32e59\",\n    \"organizationId\":\"76797ca0-dfdc-4138-967a-73eccfb9341c\",\n    \"description\":null,\n    \"startDate\":null,\n    \"endDate\":null,\n    \"revenueRecognitionMethodId\":\"417fd06e-6ddb-4c25-b21d-9137412349ac\",\n    \"externalUrl\":null,\n    \"allowTimeEntry\":false,\n    \"skipManagerApprove\":false,\n    \"billingTypeId\":\"e87e0e6b-c034-45ac-8b74-bd0256f3f535\"\n}"
+				},
+				"url": {
+					"raw": "https://api.timetta.com/odata/Projects(aa516b39-f2ec-4a2f-beaa-dc99b2b5a14b)",
+					"protocol": "https",
+					"host": [
+						"api",
+						"timetta",
+						"com"
+					],
+					"path": [
+						"odata",
+						"Projects(aa516b39-f2ec-4a2f-beaa-dc99b2b5a14b)"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "userPassword",
+			"value": "ilovetestcloud1@",
+			"type": "string"
+		},
+		{
+			"key": "userEmail",
+			"value": "german@dolnikov.ru",
+			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkUzQUJEMzAxNzdEMEZDNjU2RDg4MDRFOTQ2RUJFOTdCNTJBRUQ2MzhSUzI1NiIsInR5cCI6ImF0K2p3dCIsIng1dCI6IjQ2dlRBWGZRX0dWdGlBVHBSdXZwZTFLdTFqZyJ9.eyJuYmYiOjE2NzA2MDcyOTQsImV4cCI6MTY3MDYxMDg5NCwiaXNzIjoiaHR0cHM6Ly9hdXRoLnRpbWV0dGEuY29tIiwiYXVkIjoid29ya3BvaW50LWFwaSIsImNsaWVudF9pZCI6ImV4dGVybmFsIiwic3ViIjoiZ2VybWFuQGRvbG5pa292LnJ1IiwiYXV0aF90aW1lIjoxNjcwNjA3Mjk0LCJpZHAiOiJsb2NhbCIsIm5hbWUiOiLQkNC70LXQutGB0LDQvdC00YAg0J3QtdGB0YLQtdGA0L7QsiIsInRlbmFudCI6ImRvbG5pa292LnJ1IiwianRpIjoiNzc3MjUwNjc3MzdBRkU0MzU5Q0MwQUM0RjU0N0RGRDkiLCJpYXQiOjE2NzA2MDcyOTQsInNjb3BlIjpbImFsbCIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwd2QiXX0.Ih2nDa8tEt464CPt-JbxJbGzAGnCWLCFQUvjdhbJAppUL88QnKElvRi70PTuOcaRbAYBqRYiLdopBqPuPCgOUlz7WBZmlH1ghH_Y2JmctPyIuGMvxx8ZpTg6yuDfx-uKoSBbRD_PiSzbRa2OajkanQDQFVwGOxnrsNxMwGaJNu3N_gvafbMvML1Qk8REH7fZDMaAhYI27AlmgUyrBkatChGSGfxu2jNRey0d7PbIpy7vD51AKF7nU9lnXmmyzf_eyf1-0o6t2Lhedi6D_FIkgMXKalOfq461SzCwncc6YuN6qI4pGYi2rJbxNQ8bOESh7M5JFC7VbrcZVxaVM7WfIA",
+			"type": "string"
+		}
+	]
+}
